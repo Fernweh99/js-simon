@@ -10,7 +10,7 @@ const divCountdown = document.getElementById('display-countdown');
 const divRandomNumber = document.getElementById('display-rand-number');
 
 // Funzioni
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
 
 // creo cose utili per generare i numeri random
 const indexOfNumbers = 5;
@@ -38,6 +38,34 @@ const intervalCountdown = setInterval(() => {
     divRandomNumber.innerText = " ";
     divCountdown.innerText = second;
     clearInterval(intervalCountdown);
+    const timeRetard = setTimeout(() =>{
+      const userNumbers = [];
+      for (let i=0 ; i<gameNumbers.length ; i++) {
+        let userNumber;
+
+        do {
+          if (userNumbers.includes(userNumber)) {
+            alert("Hai già inserito questo numero!")
+          }
+          userNumber = parseInt(prompt(`Inserisci un numero da 1 a 100, ${i + 1}/${gameNumbers.length}`))
+        } while (isNaN(userNumber) || userNumber < 1 || userNumber > 100 || userNumbers.includes(userNumber));
+
+        userNumbers.push(userNumber);
+      }
+
+      let score = 0;
+      let numberGuess = "";
+
+      for (let i = 0; i < userNumbers.length; i++) {
+
+        if (gameNumbers.includes(userNumbers[i])) {
+          score += 1;
+          numberGuess += userNumbers[i] + " ";
+        }
+      }
+
+      alert(`Hai totalizzato un punteggio di ${score}/${gameNumbers.length} e i numeri che hai indovinato sono ${numberGuess}`)
+    },200)
   }
 },1000)
 
