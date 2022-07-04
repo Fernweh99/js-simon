@@ -6,7 +6,7 @@ Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei num
 */
 
 // Recupero elementi dal DOM
-const divCountdown = document.getElementById('display-Countdown');
+const divCountdown = document.getElementById('display-countdown');
 const divRandomNumber = document.getElementById('display-rand-number');
 
 // Funzioni
@@ -29,4 +29,15 @@ for (let i=0 ; i<indexOfNumbers ; i++) {
   gameNumbers.push(randomNumber);
 }
 divRandomNumber.innerHTML = textFinal;
+
+let second = 30;
+const intervalCountdown = setInterval(() => {
+  if (second) {
+    divCountdown.innerText = second--;
+  } else {
+    divRandomNumber.innerText = " ";
+    divCountdown.innerText = second;
+    clearInterval(intervalCountdown);
+  }
+},1000)
 
